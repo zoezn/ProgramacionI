@@ -116,10 +116,4 @@ int main()
             cout << "El numero es impar" << endl;
         }
     }
-
-    // Ejercicios Adicionales
-    // Ejercicio 1
-    // Primos: Hacer un programa que informe si un número es primo.
-    bool condicion2 = true;
-    int input2;
 }
