@@ -48,9 +48,10 @@ int main()
         ingresarDato(vector[i].mes, "mes del examen");
         ingresarDato(vector[i].año, "año del examen");
     }
+    cout << "Ingresos hechos:" << endl;
     for (Boleta num : vector)
     {
-        cout << num.apellido << num.año << num.dia << num.mes << num.legajo << endl;
+        cout << "Apellido: " << num.apellido << " Fecha: " << num.dia << "/" << num.mes << "/" << num.año << " Legajo: " << num.legajo << " Codigo de materia: " << num.materiaCod << endl;
     }
     // b. Dado el vector generado, desarrolle un procedimiento que genere un vector ordenado por número de legajo (cada registro debe tener los campos legajo y apellido y nombre) para todos los alumnos que se inscribieron una o más veces. Cada legajo debe ocupar una posición única y predecible. El intervalo de los legajos es 80001 a 80100 y están todos al menos una vez.
 
@@ -66,7 +67,7 @@ int main()
     {
         if (ordenado[i].apellido != "")
         {
-            cout << ordenado[i].apellido << ordenado[i].legajo << i << endl;
+            cout << "Apellido: " << ordenado[i].apellido << " Legajo: " << ordenado[i].legajo << " Posicion: " << i << endl;
         }
     }
 
