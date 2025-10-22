@@ -4,6 +4,15 @@
     "iostream": "cpp",
     "string": "cpp",
     "vector": "cpp",
-    "deque": "cpp"
+    "deque": "cpp",
+    "algorithm": "cpp",
+    "format": "cpp",
+    "array": "cpp",
+    "unordered_map": "cpp",
+    "string_view": "cpp",
+    "initializer_list": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "text_encoding": "cpp"
   }
 }

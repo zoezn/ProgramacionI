@@ -55,7 +55,7 @@ int main()
 {
     //   1. Ingresar un valor N (< 25). Generar un arreglo de N componentes en el cual las mismas
     // contengan los primeros números naturales pares e imprimirlo.
-    int input1, input2, input3, input4, input5, input6;
+    int input1, input2, input3, input4, input5, input6, input7, controlador;
     // cout << "Ingrese un numero menor a 25" << endl;
     // cin >> input1;
     // if (cin.fail() || input1 <= 0 || input1 >= 25)
@@ -73,6 +73,7 @@ int main()
     //     2. Ingresar un valor entero N (< 30) y a continuación un conjunto de N elementos. Si el último
     // elemento del conjunto tiene un valor menor que 10 imprimir los negativos y en caso contrario los
     // demás.
+
     // vector<int> elementos;
     // cout << "Ingrese un numero menor a 30" << endl;
     // cin >> input2;
@@ -207,42 +208,78 @@ int main()
     // }
 
     //     6. Ingresar un valor entero N (< 40). A continuación ingresar un conjunto VALOR de N elementos. Determinar e imprimir el valor máximo y la posición del mismo dentro del conjunto. Si el máximo no es único, imprimir todas las posiciones en que se encuentra.
-    vector<int> VALOR;
-    cout << "Ingrese un numero menor a 40" << endl;
-    cin >> input6;
-    cout << "Ingrese " << input6 << " elementos" << endl;
-    ingresarVector(input6, VALOR);
-    int maximo = VALOR[0];
-    vector<int> posiciones;
-    for (int i = 0; i < input6; i++)
-    {
-        if (maximo < VALOR[i])
-        {
-            maximo = VALOR[i];
-            posiciones.push_back(i);
-        }
-        else if (maximo = VALOR[i])
-        {
-            posiciones.push_back(i);
-        }
-    }
-    if (posiciones.size() > 1)
-    {
-        cout << "El valor maximo es " << maximo << ", en las posiciones " << " ";
-        for (int num : posiciones)
-        {
-            cout << num << " ";
-        }
-    }
-    else
-    {
+    // vector<int> VALOR;
+    // cout << "Ingrese un numero menor a 40" << endl;
+    // cin >> input6;
+    // cout << "Ingrese " << input6 << " elementos" << endl;
+    // ingresarVector(input6, VALOR);
+    // int maximo = VALOR[0];
+    // vector<int> posiciones;
+    // for (int i = 0; i < input6; i++)
+    // {
+    //     if (maximo == VALOR[i])
+    //     {
+    //         posiciones.push_back(i);
+    //     }
+    //     else if (maximo < VALOR[i])
+    //     {
+    //         maximo = VALOR[i];
+    //         posiciones.clear();
+    //         posiciones.push_back(i);
+    //     }
+    // }
+    // if (posiciones.size() > 1)
+    // {
+    //     cout << "El valor maximo es " << maximo << ", en las posiciones " << " ";
+    //     for (int num : posiciones)
+    //     {
+    //         cout << num << " ";
+    //     }
+    // }
+    // else
+    // {
+    //     cout << "El valor maximo es " << maximo << ", en la posicion " << posiciones[0] << endl;
+    // }
 
-        cout << "El valor maximo es " << maximo << ", en la posición " << posiciones[0] << endl;
-    }
     // 7. Ingresar un valor entero N (< 15). A continuación ingresar un conjunto DATO de N elementos.
     // Generar otro conjunto de dos componentes MEJORDATO donde el primer elemento sea el mayor
     // valor de DATO y el segundo el siguiente mayor (puede ser el mismo si está repetido). Imprimir el
     // conjunto MEJORDATO con identificación.
+    vector<int> DATO;
+    vector<int> MEJORDATO;
+    cout << "Ingrese un numero menor a 15" << endl;
+    cin >> input7;
+    controlador = input7;
+    cout << "Ingrese " << input7 << " elementos" << endl;
+    ingresarVector(input7, DATO);
+    MEJORDATO.push_back(DATO[0]);
+    // MEJORDATO.push_back(DATO[0]);
+    for (int i = 0; i < input7; i++)
+    {
+        if (DATO[i] > MEJORDATO[0])
+        {
+            MEJORDATO.clear();
+            MEJORDATO.push_back(DATO[i]);
+        }
+    }
+    for (int i = 0; i < controlador; i++)
+    {
+        if (DATO[i] == MEJORDATO[0])
+        {
+            DATO.erase(DATO.begin() + 1);
+            controlador = 0;
+        }
+    }
+    int lastNum = DATO[0];
+    for (int num : DATO)
+    {
+        if (num >= lastNum)
+        {
+            lastNum = num;
+        }
+    }
+    MEJORDATO[1] = lastNum;
+    cout << "El valor maximo es " << MEJORDATO[0] << ", el segundo maximo es " << MEJORDATO[1] << endl;
     // 8. Ingresar un valor entero N (< 25). A continuación ingresar un conjunto GG de N elementos.
     // Imprimir el arreglo en orden inverso generando tres estrategias para imprimir los elementos a
     // razón
