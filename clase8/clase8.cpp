@@ -63,6 +63,7 @@ int main()
             ordenado[num.legajo - 80001] = {apellido : num.apellido, legajo : num.legajo};
         }
     }
+    cout << "Ordenamiento:" << endl;
     for (int i = 0; i < 100; i++)
     {
         if (ordenado[i].apellido != "")
