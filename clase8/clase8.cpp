@@ -24,6 +24,19 @@ struct Registro
     string apellido;
     int legajo;
 };
+struct Pedido
+{
+    int cantidadPedida;
+    int nroPedido;
+    long nroCliente;
+    char codProducto;
+};
+struct Producto
+{
+    int codProducto;
+    int stock;
+    vector<Pedido> pedidos;
+};
 int main()
 {
     //    Ej. 1: Se dispone de un conjunto de boletas de inscripción de alumnos (100 como máximo) a examen en el mes de mayo. Cada boleta tiene los siguientes datos: apellido, número de legajo, código de materia, día, mes y año del examen. Los datos finalizan con un legajo igual a 0.
@@ -69,6 +82,43 @@ int main()
         if (ordenado[i].apellido != "")
         {
             cout << "Apellido: " << ordenado[i].apellido << " Legajo: " << ordenado[i].legajo << " Posicion: " << i << endl;
+        }
+    }
+    // Ej.2: Dado un vector de productos que contiene 100 registros, y cada registro corresponde a un producto que está codificado del 1 a 100, ordenado por código de producto con el siguiente diseño:
+    // Código de producto (1..100) Stock (int) y otro vector de pedidos, con el siguiente diseño:
+    // Número de pedido(int) Número de cliente(long)
+    // Código de producto (1..100, char) Cantidad pedida (int)
+    // Se pide desarrollar un procedimiento que reciba ambos vectores, y procese los pedidos haciendo lo siguiente
+
+    // c) Complete un tercer vector con el mismo diseño que el vector de pedidos, con aquellos pedidos que no pueden ser satisfechos en su totalidad.
+    // vector<Producto> productos(100);
+    Producto productos[100];
+    productos[0] = {1, 50, {{10, 1001, 2012345671L, 1}, {200, 1001, 1111L, 100}}};
+    productos[1] = {2, 20, {{5, 1002, 2012345672L, 2}, {15, 1002, 2012345672L, 2}}};
+    productos[2] = {3, 0, {{3, 1003, 2012345673L, 3}}};
+    productos[3] = {4, 15, {{20, 1004, 2012345674L, 4}}};
+    productos[4] = {5, 7, {{8, 1005, 2012345675L, 5}}};
+
+    // a) Actualizar el campo stock del vector de productos, por cada pedido que pueda ser realizado.
+    // b) Imprima el listado de los pedidos satisfechos con el siguiente formato:
+
+    // Pedido pedidosNoSatisfechos[1000];
+    vector<Pedido> pedidosNoSatisfechos;
+    for (Producto &producto : productos)
+    {
+        for (Pedido &pedido : producto.pedidos)
+        {
+            if (pedido.cantidadPedida <= producto.stock)
+            {
+                int stockOriginal = producto.stock;
+                producto.stock = producto.stock - pedido.cantidadPedida;
+                cout << "Pedido" << pedido.nroPedido << "satisfecho." << endl;
+                cout << " Stock de producto " << producto.codProducto << ": " << stockOriginal << "->" << producto.stock << endl;
+            }
+            else
+            {
+                pedidosNoSatisfechos[pedido.nroPedido] = pedido;
+            }
         }
     }
 
