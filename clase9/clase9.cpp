@@ -146,28 +146,37 @@ struct Episodio
 void apareoConControl(Episodio vec[], int n)
 {
     int i = 0;
-    // int ausentes = 0;
     int key;
     while (i < n)
     {
         key = vec[i].idSerie;
+        int cantidadEpisodiosSerie = 0;
+        int cantidadDescargasSerie = 0;
         cout << "Serie: " << key << endl;
-        // ausentes = 0;
         while (i < n && key == vec[i].idSerie)
         {
             int temporada = vec[i].numeroTemporada;
+            int totalDescargasTemporada = 0;
+            int totalEpisodiosTemporada = 0;
             cout << "  " << "Temporada: " << temporada << endl;
-            while (i < n && temporada == vec[i].numeroTemporada)
+            while (i < n && temporada == vec[i].numeroTemporada && key == vec[i].idSerie)
             {
-
+                totalDescargasTemporada += vec[i].cantidadDescargas;
+                totalEpisodiosTemporada++;
                 cout << "  " << "N. de episodio: " << "Titulo del episodio: " << "Cant. descargas: " << "Fecha de ultima descarga: " << endl;
                 cout << "       " << vec[i].numeroEpisodio << "         " << vec[i].tituloEpisodio << "         " << vec[i].cantidadDescargas << "       " << formatFecha(vec[i].fechaUltimaDescarga) << endl;
                 i++;
             }
-            cout << "....................................." << endl;
+            cout << "................................................................." << endl;
+            cout << "  " << "Cant. total episodios de la temporada: " << totalEpisodiosTemporada << endl;
+            cout << "  " << "Total descargas de la temporada: " << totalDescargasTemporada << endl;
+            cout << "................................................................." << endl;
+            cantidadDescargasSerie += totalDescargasTemporada;
+            cantidadEpisodiosSerie += totalEpisodiosTemporada;
         }
 
-        // cout << “Legajo : ” << key << “ faltas : ” << ausentes << endl;
+        cout << "Cant. total episodios de la serie: " << cantidadEpisodiosSerie << endl;
+        cout << "Total descargas de la serie: " << cantidadDescargasSerie << endl;
     }
 }
 // Teoria
