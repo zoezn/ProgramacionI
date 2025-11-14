@@ -179,6 +179,104 @@ void apareoConControl(Episodio vec[], int n)
         cout << "Total descargas de la serie: " << cantidadDescargasSerie << endl;
     }
 }
+
+struct Consola
+{
+    string nombreConsola;
+    int cantidadJuegos;
+};
+struct Juego
+{
+    int codigoJuego;
+    string tituloJuego;
+    int stockLocal;
+    string consola;
+};
+void burbujeoMejorado(Juego arr[], int n)
+{
+    // int i, j, aux;
+    int i, j;
+    string aux;
+    i = 0;
+    bool ordenado = false;
+    while (i < n && !ordenado)
+    {
+        ordenado = true; // Arranco asumiendo que si esta ordenado
+        // Los ultimos i elementos ya estan ordenados
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j].consola == arr[j + 1].consola)
+            {
+                aux = arr[j].consola;
+                arr[j] = arr[j + 1];
+                arr[j + 1].consola = aux;
+                ordenado = false; // Cambio el flag si hice un swap
+            }
+        }
+        i++;
+    }
+}
+void apareoConControl2(Juego vec[], int n, vector<Consola> &juegosPorConsola)
+{
+    int i = 0;
+    string key;
+    burbujeoMejorado(vec, n);
+    while (i < n)
+    {
+        key = vec[i].consola;
+        int cantidadDeJuegos = 0;
+        while (i < n && key == vec[i].consola)
+        {
+            cantidadDeJuegos++;
+            i++;
+            // int temporada = vec[i].numeroTemporada;
+
+            // while (i < n && temporada == vec[i].numeroTemporada && key == vec[i].idSerie)
+            // {
+
+            //     i++;
+            // }
+        }
+        juegosPorConsola.push_back({key, cantidadDeJuegos});
+    }
+}
+
+struct Pedido
+{
+    int codigoCamion;
+    float peso;
+    int bultos;
+    float precio;
+};
+
+void listarRepartos(Pedido pedidos[], int n)
+{
+
+    int i = 0;
+    int key;
+    float precioTotalPedidos = 0.0;
+    while (i < n)
+    {
+        key = pedidos[i].codigoCamion;
+        int cantPedidosCamion = 0;
+        float pesoCamion = 0.0;
+        while (i < n && key == pedidos[i].codigoCamion)
+        {
+            cantPedidosCamion++;
+            pesoCamion += pedidos[i].peso;
+            precioTotalPedidos += pedidos[i].precio;
+            i++;
+        }
+        // SALIDA CAMION
+        cout << "Camion " << pedidos[i - 1].codigoCamion
+             << ": " << cantPedidosCamion << " pedidos, "
+             << "peso total = " << pesoCamion << " kg" << endl;
+    }
+
+    // SALIDA FINAL
+    cout << "Pedidos totales: " << n << endl;
+    cout << "Monto total de todos los pedidos: $" << precioTotalPedidos << endl;
+}
 // Teoria
 // Vector: conjunto finito y homogeneo de elementos que ocupan posiciones contiguas de memoria y se encuentran asociados a un mismo nombre en comun
 // int vecA[4]
@@ -305,7 +403,49 @@ int main()
         {100000002, 1, 2000, "Episodio 1", 1, 20240301},
         {100000002, 1, 2200, "Episodio 2", 2, 20240302},
         {100000003, 1, 3000, "Episodio 1", 1, 20240401}};
-    apareoConControl(episodios.data(), episodios.size());
+    // apareoConControl(episodios.data(), episodios.size());
 
+    // El dueño de un local de venta de juegos para distintas consolas necesita desarrollar un algoritmo que
+    // genere un vector, JuegosPorConsola, ordenado por consola, con un solo registro por consola según el
+    // siguiente diseño:
+    // a) Consola (cadena) b) Cantidad de juegos (4 dígitos)
+    // Para obtener la información solicitada se cuenta con el conjunto de datos Juegos, ordenado por código de
+    // juego con un registro por cada juego que se encuentra en el local, con el siguiente diseño:
+    // 1) Código del juego (6 digitos)
+    // 3) Stock en el local (2 digitos)
+    // 2) Titulo del Juego (cadena)
+    // 4) Consola (cadena)
+    // Realizar el procedimiento que complete el vector JuegosPorConsola recibiendo el vector de Juegos
+
+    vector<Juego> juegos = {
+        {100001, "Juego A", 5, "Consola X"},
+        {100002, "Juego B", 3, "Consola Y"},
+        {100003, "Juego C", 7, "Consola X"},
+        {100004, "Juego D", 2, "Consola Z"},
+        {100005, "Juego E", 4, "Consola Y"}};
+    vector<Consola> juegosPorConsola;
+
+    for (Consola c : juegosPorConsola)
+    {
+        cout << "Consola: " << c.nombreConsola << " Cantidad de juegos: " << c.cantidadJuegos << endl;
+    }
+    // Ejercicio en clase
+    vector<Pedido> pedidos = {
+        {101, 500.5, 10, 1500.0},
+        {101, 300.0, 5, 900.0},
+        {102, 700.0, 8, 1200.0},
+        {103, 400.0, 6, 800.0},
+        {103, 600.0, 12, 1600.0}};
+    listarRepartos(pedidos.data(), pedidos.size());
+    // Resultado esperado:
+    // Camion 101: 2 pedidos, peso total = 800.5 kg
+    // Camion 102: 1 pedidos, peso total = 700.0 kg
+    // Camion 103: 2 pedidos, peso total = 1000.0 kg
+    // Pedidos totales: 5
+    // Monto total de todos los pedidos: $6000.0
+    int vec[3];
+    vec[0] = 10;
+    vec[1] = 20;
+    cout << vec[1]++;
     return 0;
 }
